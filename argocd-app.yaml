@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/0kaba0/k8s_mailfrom.git
+    repoURL: https://github.com/0kaba0hub/k8s_mailfrom.git
     targetRevision: HEAD
     path: helm
     helm:
