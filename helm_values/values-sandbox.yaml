@@ -1,0 +1,27 @@
+image:
+  repository: ghcr.io/0kaba0/mailfrom
+  tag: "latest"
+  pullPolicy: Always
+
+imagePullSecrets:
+  - name: ghcr2-pull-secret
+
+replicaCount: 1
+
+milterPort: 10031
+
+# reject | discard | quarantine_header | accept
+MF_ACTION: accept
+REJECT_CODE: "421"
+
+logLevel: ""
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi
+
+nodeSelector: {}

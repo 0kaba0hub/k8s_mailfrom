@@ -1,0 +1,31 @@
+image:
+  repository: ghcr.io/0kaba0/mailfrom
+  tag: "latest"
+  pullPolicy: Always
+
+imagePullSecrets: []
+
+replicaCount: 1
+
+# Milter listen port inside the container
+milterPort: 10031
+
+# Action on envelope-from / From-header domain mismatch.
+# Values: reject | discard | quarantine_header | accept
+MF_ACTION: reject
+
+# SMTP reply code for reject action: 421 (temporary) or 550 (permanent)
+REJECT_CODE: "421"
+
+# Set to "debug" to enable verbose per-message logging
+logLevel: ""
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi
+
+nodeSelector: {}
