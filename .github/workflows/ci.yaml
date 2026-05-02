@@ -43,6 +43,9 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-24.04
+    permissions:
+      checks: write
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -54,7 +57,15 @@ jobs:
 
       - name: Run tests
         working-directory: app/go
-        run: go test -v ./...
+        run: go test -v -json ./... > /tmp/test-results.json; exit ${PIPESTATUS[0]}
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Go Tests
+          path: /tmp/test-results.json
+          reporter: golang-json
 
   build:
     name: Build & Push
