@@ -8,7 +8,6 @@ header-includes:
   - \pagestyle{fancy}
   - \fancyhf{}
   - \fancyhead[L]{k8s\_mailfrom}
-  - \fancyhead[R]{SecondDNS}
   - \fancyfoot[C]{\thepage}
 ---
 
@@ -28,7 +27,7 @@ Only authenticated SMTP sessions (SASL) are checked. Unauthenticated connections
 
 **Architecture**
 
-![mailfrom-milter architecture](arch-mailfrom.png){ width=38% }
+![mailfrom-milter architecture](arch-mailfrom.png){ width=100% }
 
 **Stack**
 
