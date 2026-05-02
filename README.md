@@ -1,5 +1,10 @@
 # mailfrom-milter
 
+[![CI](https://github.com/0kaba0hub/k8s_mailfrom/actions/workflows/ci.yaml/badge.svg)](https://github.com/0kaba0hub/k8s_mailfrom/actions/workflows/ci.yaml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![Go version](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go)](app/go/go.mod)
+[![Container](https://img.shields.io/badge/ghcr.io-mailfrom-blue?logo=github)](https://github.com/0kaba0hub/k8s_mailfrom/pkgs/container/mailfrom)
+
 Postfix **milter** written in Go that enforces alignment between the SMTP envelope sender (`MAIL FROM`) and the `From:` message header.
 
 Licensed under **GPLv3** — see [LICENSE](LICENSE).
