@@ -1,3 +1,7 @@
+// Copyright (c) 2026 The mailfrom-milter Authors. All rights reserved.
+// Use of this source code is governed by a GNU GPLv3 style
+// license that can be found in the LICENSE file.
+//
 // mailfrom-milter — Postfix milter that enforces From-header / envelope-from
 // domain alignment for authenticated SMTP sessions.
 //
