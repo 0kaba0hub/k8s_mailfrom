@@ -1,9 +1,9 @@
 # mailfrom-milter
 
-[![CI](https://github.com/0kaba0hub/k8s_mailfrom/actions/workflows/ci.yaml/badge.svg)](https://github.com/0kaba0hub/k8s_mailfrom/actions/workflows/ci.yaml)
+[![CI](https://github.com/0kaba0hub/mailfrom-milter/actions/workflows/ci.yaml/badge.svg)](https://github.com/0kaba0hub/mailfrom-milter/actions/workflows/ci.yaml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Go version](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go)](app/go/go.mod)
-[![Container](https://img.shields.io/badge/ghcr.io-mailfrom-blue?logo=github)](https://github.com/0kaba0hub/k8s_mailfrom/pkgs/container/mailfrom)
+[![Container](https://img.shields.io/badge/ghcr.io-mailfrom--milter-blue?logo=github)](https://github.com/0kaba0hub/mailfrom-milter/pkgs/container/mailfrom-milter)
 
 Postfix **milter** written in Go that enforces alignment between the SMTP envelope sender (`MAIL FROM`) and the `From:` message header.
 
@@ -86,7 +86,7 @@ Every processed authenticated message produces one JSON log entry:
 ## Postfix configuration
 
 ```
-smtpd_milters = inet:mailfrom.mail.svc.cluster.local:10031
+smtpd_milters = inet:mailfrom-milter.mail.svc.cluster.local:10031
 milter_mail_macros = i {mail_addr} {client_addr} {client_name} {auth_authen} {auth_type}
 milter_default_action = accept
 ```
@@ -185,12 +185,12 @@ kubectl apply -f argocd-app.yaml
 ### Local
 
 ```sh
-docker build -t mailfrom:dev app/go/
-docker run --rm -p 10031:10031 -e MF_ACTION=accept -e LOG_LEVEL=debug mailfrom:dev
+docker build -t mailfrom-milter:dev app/go/
+docker run --rm -p 10031:10031 -e MF_ACTION=accept -e LOG_LEVEL=debug mailfrom-milter:dev
 ```
 
 ---
 
 ## CI
 
-Push to `main` → builds `ghcr.io/0kaba0hub/mailfrom:<sha>` + `latest` for `linux/amd64`, auto-commits the new tag to `helm_values/values-sandbox.yaml`.
+Push to `main` → builds `ghcr.io/0kaba0hub/mailfrom-milter:<sha>` + `latest` for `linux/amd64`, auto-commits the new tag to `helm_values/values-sandbox.yaml`.

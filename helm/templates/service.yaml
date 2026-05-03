@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mailfrom
+  name: mailfrom-milter
   labels:
-    app: mailfrom
+    app: mailfrom-milter
 spec:
   type: ClusterIP
   selector:
-    app: mailfrom
+    app: mailfrom-milter
   ports:
     - name: milter
       port: {{ .Values.milterPort }}
