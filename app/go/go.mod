@@ -1,4 +1,4 @@
-module github.com/0kaba0hub/mailfrom
+module github.com/0kaba0hub/mailfrom-milter
 
 go 1.26.2
 

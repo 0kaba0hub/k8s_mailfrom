@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mailfrom
+  name: mailfrom-milter
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/0kaba0hub/k8s_mailfrom.git
+    repoURL: https://github.com/0kaba0hub/mailfrom-milter.git
     targetRevision: HEAD
     path: helm
     helm:

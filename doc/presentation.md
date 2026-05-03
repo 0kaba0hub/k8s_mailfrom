@@ -7,14 +7,14 @@ header-includes:
   - \floatplacement{figure}{H}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{k8s\_mailfrom}
+  - \fancyhead[L]{mailfrom-milter}
   - \fancyfoot[C]{\thepage}
 ---
 
 ```{=latex}
 \begin{center}
 {\LARGE\bfseries TECHNICAL DOCUMENTATION}\\[16pt]
-{\large\bfseries Service: k8s\_mailfrom}
+{\large\bfseries Service: mailfrom-milter}
 \end{center}
 \vspace{10pt}
 ```
@@ -32,13 +32,13 @@ Only authenticated SMTP sessions (SASL) are checked. Unauthenticated connections
 **Stack**
 
 - Go 1.26 (`alpine:3.21` runtime image)
-- `github.com/emersion/go-milter` v0.4.1 *(third-party, vendored in `app/go/vendor/`)*
+- `github.com/0kaba0hub/go-milter` v0.4.1 (fork of `emersion/go-milter`, `go.mod replace` directive)
 - `log/slog` --- structured JSON logging
 
 **Directory layout**
 
 ```
-k8s_mailfrom/
+mailfrom-milter/
 |- app/go/
 |  |- main.go
 |  |- Dockerfile
@@ -105,7 +105,7 @@ kubectl apply -f argocd-app.yaml
 Postfix configuration:
 
 ```
-smtpd_milters = inet:mailfrom.mail.svc.cluster.local:10031
+smtpd_milters = inet:mailfrom-milter.mail.svc.cluster.local:10031
 milter_mail_macros = i {mail_addr} {client_addr} {client_name} {auth_authen} {auth_type}
 milter_default_action = accept
 ```
@@ -113,8 +113,8 @@ milter_default_action = accept
 Local development:
 
 ```sh
-docker build -t mailfrom:dev app/go/
-docker run --rm -p 10031:10031 -e MF_ACTION=accept -e LOG_LEVEL=debug mailfrom:dev
+docker build -t mailfrom-milter:dev app/go/
+docker run --rm -p 10031:10031 -e MF_ACTION=accept -e LOG_LEVEL=debug mailfrom-milter:dev
 ```
 
 ## Logging

@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mailfrom
+  name: mailfrom-milter
   labels:
-    app: mailfrom
+    app: mailfrom-milter
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: mailfrom
+      app: mailfrom-milter
   template:
     metadata:
       labels:
-        app: mailfrom
+        app: mailfrom-milter
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: mailfrom
+        - name: mailfrom-milter
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

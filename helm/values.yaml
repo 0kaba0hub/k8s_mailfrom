@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/0kaba0/mailfrom
+  repository: ghcr.io/0kaba0hub/mailfrom-milter
   tag: "latest"
   pullPolicy: Always
 

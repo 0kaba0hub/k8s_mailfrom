@@ -1,4 +1,4 @@
-name: CI — mailfrom
+name: CI — mailfrom-milter
 
 on:
   push:
@@ -17,7 +17,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/${{ github.repository_owner }}/mailfrom
+  IMAGE: ghcr.io/${{ github.repository_owner }}/mailfrom-milter
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
@@ -164,7 +164,7 @@ jobs:
         if: github.event_name == 'push'
         uses: actions/delete-package-versions@v5
         with:
-          package-name: mailfrom
+          package-name: mailfrom-milter
           package-type: container
           min-versions-to-keep: 10
           token: ${{ secrets.GHCR_DELETE_TOKEN }}
