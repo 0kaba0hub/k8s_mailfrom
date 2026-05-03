@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/0kaba0hub/mailfrom-milter/main/doc/dockerhub-icon.svg" width="120" alt="mailfrom-milter logo"/>
-</p>
-
 # mailfrom-milter
 
 <table><tr>
@@ -20,6 +16,8 @@ Licensed under **GPLv3** — see [LICENSE](LICENSE).
 
 </td>
 </tr></table>
+
+## Architecture
 
 ![Architecture](https://raw.githubusercontent.com/0kaba0hub/mailfrom-milter/main/doc/arch-mailfrom.svg)
 
