@@ -172,7 +172,7 @@ jobs:
 
       - name: Update Docker Hub description
         if: github.event_name == 'push'
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: 0kaba0
           password: ${{ secrets.DOCKERHUB_TOKEN }}
