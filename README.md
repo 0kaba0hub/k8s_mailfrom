@@ -50,8 +50,8 @@ Configured via the `MF_ACTION` environment variable.
 
 | Action | On `flag_check_auth` fail | On `flag_check_data` fail | On both pass |
 |:---|:---|:---|:---|
-| `reject` | `421 4.7.1 … MFC010001` | `421 4.7.1 … MFC010002` | log + accept |
-| `discard` | silent drop, log `MFC020001` | silent drop, log `MFC020002` | log + accept |
+| `reject` | `421 4.7.1 … MFC010001` | `421 4.7.1 … MFC010002` | log + accept (+ `X-MF-Envelope-From` if `MF_SENDER_ADD=yes`) |
+| `discard` | silent drop, log `MFC020001` | silent drop, log `MFC020002` | log + accept (+ `X-MF-Envelope-From` if `MF_SENDER_ADD=yes`) |
 | `quarantine_header` | log + add headers (`X-MF-Quarantine: yes`) | log + add headers (`X-MF-Quarantine: yes`) | log + add headers (`X-MF-Quarantine: no`) |
 | `accept` | log only, accept | log only, accept | log only, accept |
 
@@ -61,13 +61,21 @@ Default: `reject`.
 
 ## Headers added
 
-For `quarantine_header` action only:
+### `quarantine_header` action
 
 | Header | Value |
 |:---|:---|
 | `X-MF-Envelope-From` | `MAIL FROM` address |
 | `X-MF-From` | Address extracted from `From:` header |
 | `X-MF-Quarantine` | `yes` if any check failed, `no` if all passed |
+
+### `reject` and `discard` actions (when `MF_SENDER_ADD=yes`)
+
+When `MF_SENDER_ADD=yes`, accepted authenticated messages (both checks passed) get:
+
+| Header | Value |
+|:---|:---|
+| `X-MF-Envelope-From` | `MAIL FROM` address |
 
 ---
 
@@ -147,6 +155,7 @@ rate(mailfrom_messages_total{action="reject"}[5m])
 | `METRICS_ADDR` | `0.0.0.0:8081` | TCP address for `/healthz`, `/readyz`, `/metrics` |
 | `MF_ACTION` | `reject` | `reject` / `discard` / `quarantine_header` / `accept` |
 | `REJECT_CODE` | `421` | SMTP reply code for `reject` action: `421` (temp) or `550` (perm) |
+| `MF_SENDER_ADD` | `no` | Set to `yes` to add `X-MF-Envelope-From` on accepted authenticated messages (`reject` and `discard` actions only) |
 | `LOG_LEVEL` | — | Set to `debug` for verbose per-message logging |
 
 ---
