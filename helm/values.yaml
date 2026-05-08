@@ -45,12 +45,4 @@ nodeSelector: {}
 #     --from-literal=password='<smtp-password>' -n <namespace>
 postDeployTest:
   enabled: false
-  smtp:
-    host: ""             # relay hostname or k8s service, e.g. relay.relay.svc.cluster.local
-    port: 587            # submission port (STARTTLS + SASL)
-    port25: 25           # plain SMTP port for unauthenticated test (case 1)
-    user: ""             # SASL username, e.g. noreply@seconddns.com
-    credentialsSecret: "mailfrom-test-creds"
-    credentialsSecretKey: "password"
-  mailFrom: ""           # MAIL FROM domain must match smtp.user domain
-  mailTo: ""             # recipient for test messages
+  credentialsSecret: "mailfrom-test-creds"  # all params loaded from this secret

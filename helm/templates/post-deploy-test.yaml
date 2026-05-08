@@ -123,25 +123,10 @@ spec:
         - name: test
           image: python:3.13-alpine
           command: ["python", "/scripts/test.py"]
-          env:
-            - name: SMTP_HOST
-              value: {{ .Values.postDeployTest.smtp.host | quote }}
-            - name: SMTP_PORT
-              value: {{ .Values.postDeployTest.smtp.port | quote }}
-            - name: SMTP_PORT25
-              value: {{ .Values.postDeployTest.smtp.port25 | quote }}
-            - name: SASL_USER
-              value: {{ .Values.postDeployTest.smtp.user | quote }}
-            - name: SASL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.postDeployTest.smtp.credentialsSecret }}
-                  key: {{ .Values.postDeployTest.smtp.credentialsSecretKey }}
-                  optional: true
-            - name: MAIL_FROM
-              value: {{ .Values.postDeployTest.mailFrom | quote }}
-            - name: MAIL_TO
-              value: {{ .Values.postDeployTest.mailTo | quote }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.postDeployTest.credentialsSecret }}
+                optional: true
           volumeMounts:
             - name: script
               mountPath: /scripts
