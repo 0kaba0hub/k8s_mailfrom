@@ -15,7 +15,9 @@ conventional_commits = true
 filter_unconventional = true
 split_commits = false
 commit_parsers = [
+  { message = "^Merge (pull request|branch)", skip = true },
   { message = "^ci: update .* image tag", skip = true },
+  { message = "^ci:", skip = true },
   { message = "\\[skip ci\\]", skip = true },
   { message = "^feat", group = "Features" },
   { message = "^fix", group = "Bug Fixes" },
