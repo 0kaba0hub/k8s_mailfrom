@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/emersion/go-milter"
+	"github.com/0kaba0hub/go-milter"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/testutil"
 )
