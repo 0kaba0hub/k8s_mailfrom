@@ -28,7 +28,7 @@ import (
 	"sync/atomic"
 	"syscall"
 
-	"github.com/emersion/go-milter"
+	"github.com/0kaba0hub/go-milter"
 )
 
 // ---------------------------------------------------------------------------
